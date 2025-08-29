@@ -89,4 +89,10 @@ public class ArticleController {
         redirectAttributes.addFlashAttribute("msg", "새로운 게시글이 등록되었습니다.");
         return "redirect:/articles";
     }
+
+    //업데이트 수정 및 저장
+    @GetMapping("{id}/update")
+    public String viewUpdateArticle(@PathVariable("id") Long id, Model model){
+        model.addAttribute("dto", articleService.insertArticle();)
+    }
 }
