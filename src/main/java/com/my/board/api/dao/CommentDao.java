@@ -19,12 +19,20 @@ public class CommentDao {
     }
 
     public void insertComment(Long articleId, Comment comment) {
-        //1 해당 게시글을찾는다
+        // 1. 해당 게시글을 찾는다.
         Article article = em.find(Article.class, articleId);
-        // 2. comment엔테ㅣ티에 아티클을 먼저 할당
+        // 2. comment 엔티티에 article을 할당
         comment.setArticle(article);
-        // 3 comment게시글에 리스트를 추가한다
+        // 3. comment를 게시글에 리스트로 추가한다.
         article.getComments().add(comment);
         em.persist(article);
+    }
+
+    public void updateComment(Comment comment) {
+        // 원본을 읽어온다.
+        Comment updateComment = em.find(Comment.class, comment.getId());
+        // body만 수정한다.
+        // Dirty Checking에 의해서 저장까지 됨.
+        updateComment.setBody(comment.getBody());
     }
 }
